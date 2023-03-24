@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ProductsApi.Models;
@@ -17,6 +18,7 @@ namespace ProductsApi.Controllers
         }
 
         [HttpGet]
+        [EnableCors]
         public async Task<ActionResult<IEnumerable<Products>>> GetProducts()
         {
             if(_dbContext.Products == null)
@@ -27,6 +29,7 @@ namespace ProductsApi.Controllers
         }
 
         [HttpGet("{id}")]
+        [EnableCors]
         public async Task<ActionResult<Products>> GetProducts(int id)
         {
             if(_dbContext.Products == null)
@@ -44,6 +47,7 @@ namespace ProductsApi.Controllers
         }
 
         [HttpPost]
+        [EnableCors]
         public async Task<ActionResult<Products>> PostProducts(Products items)
         {
             _dbContext.Products.Add(items);
@@ -53,6 +57,7 @@ namespace ProductsApi.Controllers
         }
 
         [HttpPut("{id}")]
+        [EnableCors]
         public async Task<IActionResult> PutProduct(int id, Products items)
         {
             if(id != items.Id)
@@ -82,6 +87,7 @@ namespace ProductsApi.Controllers
         }
 
         [HttpDelete("{id}")]
+        [EnableCors]
         public async Task<IActionResult> DeleteProduct(int id)
         {
             if (_dbContext.Products == null)
